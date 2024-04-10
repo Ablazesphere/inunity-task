@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "534767584983",
+    "project_id": "inunity-task",
+    "storage_bucket": "inunity-task.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:534767584983:android:cc7e8b35f96f46252d9292",
+        "android_client_info": {
+          "package_name": "com.example.todo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKOh6MhqoT8qpp4UaWe_v7v9GmVHFL3eg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
