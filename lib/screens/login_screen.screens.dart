@@ -38,9 +38,12 @@ class _LoginPageState extends State<LoginPage> {
   bool _isLoading = false;
 
   void loading() {
-    setState(() {
-      _isLoading = !_isLoading;
-    });
+    if (mounted) {
+      // Check if the widget is still in the widget tree
+      setState(() {
+        _isLoading = !_isLoading;
+      });
+    }
   }
 
   void _switchType() {
@@ -72,20 +75,30 @@ class _LoginPageState extends State<LoginPage> {
         body: SafeArea(
           child: Consumer(builder: (context, ref, _) {
             final auth = ref.watch(authenticationProvider);
+
             Future<void> _onPressedFunction() async {
               if (!_formKey.currentState!.validate()) {
                 return;
               }
-              if (type == Status.login) {
-                loading();
-                await auth.signInWithEmailAndPassword(
-                    _email.text, _password.text, context);
-                loading();
-              } else {
-                loading();
-                await auth.signUpWithEmailAndPassword(
-                    _email.text, _password.text, context);
-                loading();
+
+              loading(); // Start loading
+
+              try {
+                if (type == Status.login) {
+                  await auth.signInWithEmailAndPassword(
+                      _email.text, _password.text, context);
+                } else {
+                  await auth.signUpWithEmailAndPassword(
+                      _email.text, _password.text, context);
+                }
+              } catch (e) {
+                // Handle error
+                print('Error: $e');
+              } finally {
+                if (mounted) {
+                  // Check if the widget is still in the widget tree
+                  loading(); // Stop loading
+                }
               }
             }
 
